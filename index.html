@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <title>Rotate Loading</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+      .loading {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        transform: rotate(0deg);
+      }
+      .c1 {
+        width: 30px;
+        height: 30px;
+        top: -15px;
+        left: calc(50% - 15px);
+        background-color: #3a71c4;
+        transform-origin: 15px 90px;
+        animation-delay: 500ms !important;
+        transform: rotate(0deg);
+      }
+      .c2 {
+        width: 28px;
+        height: 28px;
+        top: -14px;
+        left: calc(50% - 14px);
+        background-color: #3a71c4;
+        transform-origin: 14px 89px;
+        animation-delay: 800ms !important;
+      }
+      .c3 {
+        width: 26px;
+        height: 26px;
+        top: -13px;
+        left: calc(50% - 13px);
+        background-color: #3a71c4;
+        transform-origin: 13px 88px;
+        animation-delay: 1100ms !important;
+      }
+      .c4 {
+        width: 24px;
+        height: 24px;
+        top: -12px;
+        left: calc(50% - 12px);
+        background-color: #3a71c4;
+        transform-origin: 12px 87px;
+        animation-delay: 1400ms !important;
+      }
+      .c5 {
+        width: 22px;
+        height: 22px;
+        top: -11px;
+        left: calc(50% - 11px);
+        background-color: #3a71c4;
+        transform-origin: 11px 86px;
+        animation-delay: 1700ms !important;
+      }
+      .rotate {
+        animation: loading 3s ease-in-out;
+      }
+      @keyframes loading {
+        0% {
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: rotate(360deg);
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="loading">
+      <div class="circle c1"></div>
+      <div class="circle c2"></div>
+      <div class="circle c3"></div>
+      <div class="circle c4"></div>
+      <div class="circle c5"></div>
+    </div>
+    <script>
+      // 定时器存在问题？后续修复
+      var circleList = document.getElementsByClassName("circle");
+      setInterval(() => {
+        Array.prototype.forEach.call(circleList, function (circle) {
+          circle.classList.add("rotate");
+          circle.addEventListener("animationend", function () {
+            circle.classList.remove("rotate");
+            // setTimeout(function () {
+            //   circle.classList.add("rotate");
+            // }, 1000);
+          });
+        });
+      }, 3000);
+    </script>
+  </body>
+</html>
